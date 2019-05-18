@@ -1,9 +1,12 @@
 const displayQuote = document.querySelector('.quote');
-const url = 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1';
+const url = `http://quotes.rest/qod.json?category=management`;
+
+
 
 fetch(url)
+    .then((response) => response.json())
     .then((data) => {
-        console.log(data);
+        const quote = data.contents.quotes[0].quote;
     })
     .catch((err) => {
         console.log(err);
