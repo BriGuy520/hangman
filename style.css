@@ -1,3 +1,11 @@
 p {
   display: inline-block;
+  padding: 3px;
+  text-decoration: underline;
+  font-size: 1.4em;
+}
+
+.author {
+  display: block;
+  text-decoration: none;
 }
