@@ -7,11 +7,13 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="draw()">
     <h1>Hangman</h1>
+        <h2>Enter a Letter:</h2>
         <input type="text" />
         <button>Submit</button>
         <div class="quote"></div>
+        <canvas id="hangman"></canvas>
 
 
     <script src="./app.js"></script>
