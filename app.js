@@ -1,6 +1,8 @@
 const displayQuote = document.querySelector('.quote');
 const displayhAuthor = document.querySelector('.author');
 
+let wrongGuess = 0;
+
 const url = `http://quotes.rest/qod.json?category=management`;
 
 // setting up the hangman canvas
@@ -9,7 +11,8 @@ function draw(){
     const ctx = canvas.getContext('2d');
 
     const podium = 'rgb(204, 102, 0)';
-    const rope = 'white';
+    const rope = 'red';
+    const body = 'red';
 
     //base
     ctx.beginPath();
@@ -34,18 +37,54 @@ function draw(){
 
     // rope
     ctx.beginPath();
-    ctx.stokeStyle = podium;
+    ctx.fillStyle = rope;
     ctx.moveTo(140, 20);
     ctx.lineTo(140, 40);
     ctx.stroke();
+
+    
+        ctx.beginPath();
+        ctx.arc(140, 50, 10, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = rope;
+        ctx.moveTo(140, 60);
+        ctx.lineTo(140, 100);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = rope;
+        ctx.moveTo(140, 70);
+        ctx.lineTo(120, 80);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = rope;
+        ctx.moveTo(140, 70);
+        ctx.lineTo(160, 80);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = rope;
+        ctx.moveTo(140, 100);
+        ctx.lineTo(120, 110);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = rope;
+        ctx.moveTo(140, 100);
+        ctx.lineTo(160, 110);
+        ctx.stroke();
+
 
 }
 
 // this will append each letter from the quote to the dom
 function createNode(element){
-    let newNode = document.createElement('p')
+    let newNode = document.createElement('span');
     let htmlElement = document.body.appendChild(newNode);
-    htmlElement.innerHTML = element;
+    htmlElement.innerHTML = '<p class="letter">' + element + '</p>';
 }
 
 function showAuthor(name){

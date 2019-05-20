@@ -11,8 +11,14 @@
 p {
   display: inline-block;
   padding: 3px;
-  text-decoration: underline;
+  margin: auto 6px;
   font-size: 1.4em;
+  visibility: hidden;
+}
+
+.letter {
+  padding: 8px;
+  border-bottom: 1px solid black;
 }
 
 .author {
