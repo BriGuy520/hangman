@@ -25,6 +25,7 @@ p {
 
 .author {
   display: block;
+  visibility: visible;
   text-decoration: none;
 }
 

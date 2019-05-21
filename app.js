@@ -42,42 +42,42 @@ function draw(){
     ctx.lineTo(140, 40);
     ctx.stroke();
 
-    
+    if(wrongGuess === 1){
         ctx.beginPath();
+        ctx.fillStyle = body;
         ctx.arc(140, 50, 10, 0, 2 * Math.PI);
         ctx.stroke();
-
+    } else if(wrongGuess === 2){
         ctx.beginPath();
-        ctx.fillStyle = rope;
+        ctx.fillStyle = body;
         ctx.moveTo(140, 60);
         ctx.lineTo(140, 100);
         ctx.stroke();
-
+    } else if(wrongGuess === 3){
         ctx.beginPath();
-        ctx.fillStyle = rope;
+        ctx.fillStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(120, 80);
         ctx.stroke();
-
+    } else if(wrongGuess === 4){
         ctx.beginPath();
-        ctx.fillStyle = rope;
+        ctx.fillStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(160, 80);
         ctx.stroke();
-
+    } else if(wrongGuess === 5){
         ctx.beginPath();
-        ctx.fillStyle = rope;
+        ctx.fillStyle = body;
         ctx.moveTo(140, 100);
         ctx.lineTo(120, 110);
         ctx.stroke();
-
+    } else if(wrongGuess === 6){
         ctx.beginPath();
-        ctx.fillStyle = rope;
+        ctx.fillStyle = body;
         ctx.moveTo(140, 100);
         ctx.lineTo(160, 110);
         ctx.stroke();
-
-
+    }
 }
 
 // this will append each letter from the quote to the dom
