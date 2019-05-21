@@ -9,7 +9,6 @@
 }
 
 p {
-  display: inline-block;
   padding: 3px;
   margin: auto 6px;
   font-size: 1.4em;
@@ -17,8 +16,11 @@ p {
 }
 
 .letter {
-  padding: 8px;
+  display: inline-block;
+  padding: 4px;
   border-bottom: 1px solid black;
+  visibility: visible;
+  margin: 4px;
 }
 
 .author {

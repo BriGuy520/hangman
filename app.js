@@ -84,7 +84,13 @@ function draw(){
 function createNode(element){
     let newNode = document.createElement('span');
     let htmlElement = document.body.appendChild(newNode);
-    htmlElement.innerHTML = '<p class="letter">' + element + '</p>';
+    htmlElement.setAttribute('class', 'letter');
+    htmlElement.innerHTML = '<p>' + element + '</p>';
+
+
+    if(element === " "){
+        htmlElement.style.borderBottom = 'none';
+    }
 }
 
 function showAuthor(name){
