@@ -1,7 +1,12 @@
 const displayQuote = document.querySelector('.quote');
 const displayhAuthor = document.querySelector('.author');
 
+const userGuess = document.getElementById('guess');
+const submitGuess = document.getElementById('submitGuess');
+
 let wrongGuess = 0;
+
+let regex = /[A-Za-z]/gi;
 
 const url = `http://quotes.rest/qod.json?category=management`;
 
@@ -11,7 +16,7 @@ function draw(){
     const ctx = canvas.getContext('2d');
 
     const podium = 'rgb(204, 102, 0)';
-    const rope = 'red';
+    const rope = '#ffffff';
     const body = 'red';
 
     //base
@@ -80,16 +85,30 @@ function draw(){
     }
 }
 
+submitGuess.addEventListener('click', () => {
+    handleGuess(userGuess);
+});
+
+function handleGuess(guess){
+    console.log(guess.value);
+}
+
+
+
 // this will append each letter from the quote to the dom
 function createNode(element){
     let newNode = document.createElement('span');
     let htmlElement = document.body.appendChild(newNode);
     htmlElement.setAttribute('class', 'letter');
-    htmlElement.innerHTML = '<p>' + element + '</p>';
-
+    htmlElement.innerHTML = `<p>${element}</p>`;
 
     if(element === " "){
         htmlElement.style.borderBottom = 'none';
+    }
+
+    if(element.search(regex) === -1){
+        htmlElement.style.borderBottom = 'none';
+        htmlElement.style.visibility = 'visible';
     }
 }
 
@@ -110,12 +129,10 @@ fetch(url)
 
         quote.split('').forEach(char => {
             // call the createNode function from line 6
-            return createNode(char);
+            createNode(char);
         });
-
-        return showAuthor(author);
-
         
+        showAuthor(author);     
     })
     .catch((err) => {
         console.log(err);
