@@ -4,11 +4,36 @@ const displayhAuthor = document.querySelector('.author');
 const userGuess = document.getElementById('guess');
 const submitGuess = document.getElementById('submitGuess');
 
-let wrongGuess = 0;
+const regex = /[A-Za-z]/gi;
 
-let regex = /[A-Za-z]/gi;
+let wrongGuess = 6;
+
 
 const url = `http://quotes.rest/qod.json?category=management`;
+
+// this will be our promise to get our quote from the API
+fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+        const quote = data.contents.quotes[0].quote;
+        const author = data.contents.quotes[0].author;
+        
+        createBoard(quote);
+        showAuthor(author);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+// split the quote into an array of individual letters
+
+function createBoard(quote){    
+    quote.split('').forEach(char => {
+        // call the createNode function from line 6
+        createNode(char);    
+    });
+}
 
 // setting up the hangman canvas
 function draw(){
@@ -47,36 +72,46 @@ function draw(){
     ctx.lineTo(140, 40);
     ctx.stroke();
 
-    if(wrongGuess === 1){
+    if(wrongGuess >= 1){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.arc(140, 50, 10, 0, 2 * Math.PI);
         ctx.stroke();
-    } else if(wrongGuess === 2){
+    }
+    
+    if(wrongGuess >= 2){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.moveTo(140, 60);
         ctx.lineTo(140, 100);
         ctx.stroke();
-    } else if(wrongGuess === 3){
+    } 
+    
+    if(wrongGuess >= 3){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(120, 80);
         ctx.stroke();
-    } else if(wrongGuess === 4){
+    } 
+    
+    if(wrongGuess >= 4){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(160, 80);
         ctx.stroke();
-    } else if(wrongGuess === 5){
+    }
+    
+    if(wrongGuess >= 5){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.moveTo(140, 100);
         ctx.lineTo(120, 110);
         ctx.stroke();
-    } else if(wrongGuess === 6){
+    } 
+    
+    if(wrongGuess === 6){
         ctx.beginPath();
         ctx.fillStyle = body;
         ctx.moveTo(140, 100);
@@ -86,13 +121,15 @@ function draw(){
 }
 
 submitGuess.addEventListener('click', () => {
-    handleGuess(userGuess);
+    if(userGuess.value.length === 1){
+    
+    }
 });
 
-function handleGuess(guess){
-    console.log(guess.value);
-}
 
+function handleQuote(quote){
+    return quote.split('');
+}
 
 
 // this will append each letter from the quote to the dom
@@ -120,22 +157,5 @@ function showAuthor(name){
 }
 
 
-// this will be our promise to get our quote from the API
-fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-        const quote = data.contents.quotes[0].quote;
-        const author = data.contents.quotes[0].author;
-
-        quote.split('').forEach(char => {
-            // call the createNode function from line 6
-            createNode(char);
-        });
-        
-        showAuthor(author);     
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 
 
