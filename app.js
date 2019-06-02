@@ -130,7 +130,9 @@ submitGuess.addEventListener('click', () => {
     let letter = document.getElementsByClassName(`${userGuess.value}`);
     
     if(userGuess.value.length === 1 && letter.length !== 0){
-        
+        for(let char of letter){
+           char.style.visibility = 'visible';
+        }
     }
 });
 
