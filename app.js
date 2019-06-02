@@ -7,7 +7,6 @@ const submitGuess = document.getElementById('submitGuess');
 const regex = /[A-Za-z]/gi;
 
 let wrongGuess = 0;
-console.log(wrongGuess);
 
 const url = `http://quotes.rest/qod.json?category=management`;
 
@@ -121,10 +120,11 @@ function draw(){
 
 submitGuess.addEventListener('click', () => {
     let letter = document.getElementsByClassName(`${userGuess.value}`);
-    
+    let guessInput = document.getElementById('guess');
+
     if(userGuess.value.length === 1 && letter.length !== 0){
         for(let char of letter){
-           char.style.visibility = 'visible';
+           char.style.visibility = 'visible';   
         }
     } 
 
@@ -132,6 +132,8 @@ submitGuess.addEventListener('click', () => {
         wrongGuess += 1;
         draw();
     }
+
+    guessInput.value = '';
 });
 
 
