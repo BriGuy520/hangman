@@ -6,27 +6,34 @@ const submitGuess = document.getElementById('submitGuess');
 
 const regex = /[A-Za-z]/gi;
 
-let wrongGuess = 6;
+let wrongGuess = 0;
+let quoteData = {
+    createArr: function(str){
+        return str.split('');
+    }
+}
 
+let quoteArr;
 
 const url = `http://quotes.rest/qod.json?category=management`;
 
+// split the quote into an array of individual letters
+
+
 // this will be our promise to get our quote from the API
 fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-        const quote = data.contents.quotes[0].quote;
-        const author = data.contents.quotes[0].author;
-        
-        createBoard(quote);
-        showAuthor(author);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-
-// split the quote into an array of individual letters
+.then((response) => response.json())
+.then((data) => {
+    const quote = data.contents.quotes[0].quote;
+    const author = data.contents.quotes[0].author;
+    
+    quoteArr = quoteData.createArr(quote);
+    createBoard(quote);
+    showAuthor(author);
+})
+.catch((err) => {
+    console.log(err);
+});
 
 function createBoard(quote){    
     quote.split('').forEach(char => {
@@ -34,7 +41,6 @@ function createBoard(quote){
         createNode(char);    
     });
 }
-
 // setting up the hangman canvas
 function draw(){
     const canvas = document.getElementById('hangman');
@@ -121,15 +127,12 @@ function draw(){
 }
 
 submitGuess.addEventListener('click', () => {
-    if(userGuess.value.length === 1){
+    let letter = document.getElementsByClassName(`${userGuess.value}`);
     
+    if(userGuess.value.length === 1 && letter.length !== 0){
+        
     }
 });
-
-
-function handleQuote(quote){
-    return quote.split('');
-}
 
 
 // this will append each letter from the quote to the dom
@@ -137,7 +140,7 @@ function createNode(element){
     let newNode = document.createElement('span');
     let htmlElement = document.body.appendChild(newNode);
     htmlElement.setAttribute('class', 'letter');
-    htmlElement.innerHTML = `<p>${element}</p>`;
+    htmlElement.innerHTML = `<p class=${element}>${element}</p>`;
 
     if(element === " "){
         htmlElement.style.borderBottom = 'none';
