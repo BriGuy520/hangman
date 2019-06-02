@@ -7,13 +7,7 @@ const submitGuess = document.getElementById('submitGuess');
 const regex = /[A-Za-z]/gi;
 
 let wrongGuess = 0;
-let quoteData = {
-    createArr: function(str){
-        return str.split('');
-    }
-}
-
-let quoteArr;
+console.log(wrongGuess);
 
 const url = `http://quotes.rest/qod.json?category=management`;
 
@@ -26,8 +20,7 @@ fetch(url)
 .then((data) => {
     const quote = data.contents.quotes[0].quote;
     const author = data.contents.quotes[0].author;
-    
-    quoteArr = quoteData.createArr(quote);
+
     createBoard(quote);
     showAuthor(author);
 })
@@ -133,6 +126,11 @@ submitGuess.addEventListener('click', () => {
         for(let char of letter){
            char.style.visibility = 'visible';
         }
+    } 
+
+    if(letter.length === 0){
+        wrongGuess += 1;
+        draw();
     }
 });
 
