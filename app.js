@@ -40,7 +40,7 @@ function draw(){
 
     const podium = 'rgb(204, 102, 0)';
     const rope = '#ffffff';
-    const body = 'red';
+    const body = 'green';
 
     //base
     ctx.beginPath();
@@ -65,21 +65,21 @@ function draw(){
 
     // rope
     ctx.beginPath();
-    ctx.fillStyle = rope;
+    ctx.strokeStyle = rope;
     ctx.moveTo(140, 20);
     ctx.lineTo(140, 40);
     ctx.stroke();
 
     if(wrongGuess >= 1){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.arc(140, 50, 10, 0, 2 * Math.PI);
         ctx.stroke();
     }
     
     if(wrongGuess >= 2){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.moveTo(140, 60);
         ctx.lineTo(140, 100);
         ctx.stroke();
@@ -87,7 +87,7 @@ function draw(){
     
     if(wrongGuess >= 3){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(120, 80);
         ctx.stroke();
@@ -103,7 +103,7 @@ function draw(){
     
     if(wrongGuess >= 5){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.moveTo(140, 100);
         ctx.lineTo(120, 110);
         ctx.stroke();
@@ -111,7 +111,7 @@ function draw(){
     
     if(wrongGuess === 6){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.moveTo(140, 100);
         ctx.lineTo(160, 110);
         ctx.stroke();

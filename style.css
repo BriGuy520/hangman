@@ -8,6 +8,36 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+h1 {
+  width: 100%;
+  text-align: center;
+  background: lightsteelblue;
+  padding: 20px;
+}
+
+.submit-box {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.submit-box h2 {
+  padding: 10px;
+}
+
+#guess {
+  width: 30px;
+  font-size: 1.8em;
+}
+
+#submitGuess {
+  margin: 0 10px;
+  padding: 0 15px;
+  border-radius: 5px;
+  background: rgb(235, 56, 56);
+  color: white;
+  font-weight: 600;
+}
 
 #hangman {
   display: block;
@@ -37,5 +67,6 @@ p {
   display: block;
   visibility: visible;
   text-decoration: none;
+  padding: 35px 10px;
 }
 
