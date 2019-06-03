@@ -3,6 +3,8 @@ const displayhAuthor = document.querySelector('.author');
 
 const userGuess = document.getElementById('guess');
 const submitGuess = document.getElementById('submitGuess');
+const inner = document.getElementsByClassName('inner');
+const resetGame = document.getElementById('resetGame');
 
 const regex = /[A-Za-z]/gi;
 
@@ -10,22 +12,23 @@ let wrongGuess = 0;
 
 const url = `http://quotes.rest/qod.json?category=management`;
 
-// split the quote into an array of individual letters
-
-
 // this will be our promise to get our quote from the API
-fetch(url)
-.then((response) => response.json())
-.then((data) => {
-    const quote = data.contents.quotes[0].quote;
-    const author = data.contents.quotes[0].author;
+function apiCall(url){
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+        const quote = data.contents.quotes[0].quote;
+        const author = data.contents.quotes[0].author;
+    
+        createBoard(quote);
+        showAuthor(author);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
 
-    createBoard(quote);
-    showAuthor(author);
-})
-.catch((err) => {
-    console.log(err);
-});
+apiCall(url);
 
 function createBoard(quote){    
     quote.split('').forEach(char => {
@@ -33,6 +36,7 @@ function createBoard(quote){
         createNode(char);    
     });
 }
+
 // setting up the hangman canvas
 function draw(){
     const canvas = document.getElementById('hangman');
@@ -95,7 +99,7 @@ function draw(){
     
     if(wrongGuess >= 4){
         ctx.beginPath();
-        ctx.fillStyle = body;
+        ctx.strokeStyle = body;
         ctx.moveTo(140, 70);
         ctx.lineTo(160, 80);
         ctx.stroke();
@@ -115,6 +119,7 @@ function draw(){
         ctx.moveTo(140, 100);
         ctx.lineTo(160, 110);
         ctx.stroke();
+        resetGame.style.visibility = 'visible';
     }
 }
 
@@ -136,13 +141,24 @@ submitGuess.addEventListener('click', () => {
     guessInput.value = '';
 });
 
+// Reset game if user has been hangmanned
+resetGame.addEventListener('click', () => {
+    for(let char of inner){
+        if(char.style.visibility === 'visible'){
+            char.style.visibility = 'hidden';
+        }
+    }
+    wrongGuess = 0;   
+});
+
+
 
 // this will append each letter from the quote to the dom
 function createNode(element){
     let newNode = document.createElement('span');
     let htmlElement = document.body.appendChild(newNode);
     htmlElement.setAttribute('class', 'letter');
-    htmlElement.innerHTML = `<p class=${element}>${element}</p>`;
+    htmlElement.innerHTML = `<p class="${element} inner">${element}</p>`;
 
     if(element === " "){
         htmlElement.style.borderBottom = 'none';

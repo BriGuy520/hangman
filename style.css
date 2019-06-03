@@ -30,13 +30,16 @@ h1 {
   font-size: 1.8em;
 }
 
-#submitGuess {
-  margin: 0 10px;
+.button {
+  margin: 0 5px;
   padding: 0 15px;
   border-radius: 5px;
-  background: rgb(235, 56, 56);
   color: white;
   font-weight: 600;
+}
+
+#submitGuess {
+  background: rgb(235, 56, 56);
 }
 
 #hangman {
@@ -46,6 +49,11 @@ h1 {
   width: 300px;
   background: black;
   margin: 20px;
+}
+
+#resetGame {
+  background: slateblue;
+  visibility: hidden;
 }
 
 p {
