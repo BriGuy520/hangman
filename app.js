@@ -53,7 +53,7 @@ function createNode(element){
 
     if(element.search(regex) === -1){
         htmlElement.style.borderBottom = 'none';
-        htmlElement.style.visibility = 'visible';
+        htmlElement.childNodes[0].style.visibility = 'visible';
     }
 }
 
