@@ -6,6 +6,9 @@ const submitGuess = document.getElementById('submitGuess');
 const inner = document.getElementsByClassName('inner');
 const resetGame = document.getElementById('resetGame');
 
+const canvas = document.getElementById('hangman');
+const ctx = canvas.getContext('2d');
+
 const regex = /[A-Za-z]/gi;
 
 let wrongGuess = 0;
@@ -39,41 +42,41 @@ function createBoard(quote){
 
 // setting up the hangman canvas
 function draw(){
-    const canvas = document.getElementById('hangman');
-    const ctx = canvas.getContext('2d');
-
     const podium = 'rgb(204, 102, 0)';
     const rope = '#ffffff';
     const body = 'green';
+    
+    if(wrongGuess >= 0){
+        //base
+        ctx.beginPath();
+        ctx.strokeStyle = podium;
+        ctx.moveTo(100, 120)
+        ctx.lineTo(10, 120);
+        ctx.stroke();
 
-    //base
-    ctx.beginPath();
-    ctx.strokeStyle = podium;
-    ctx.moveTo(100, 120)
-    ctx.lineTo(10, 120);
-    ctx.stroke();
+        // pole
+        ctx.beginPath();
+        ctx.stokeStyle = podium;
+        ctx.moveTo(60, 20);
+        ctx.lineTo(60, 120);
+        ctx.stroke();
 
-    // pole
-    ctx.beginPath();
-    ctx.stokeStyle = podium;
-    ctx.moveTo(60, 20);
-    ctx.lineTo(60, 120);
-    ctx.stroke();
+        // bar
+        ctx.beginPath();
+        ctx.stokeStyle = podium;
+        ctx.moveTo(140, 20);
+        ctx.lineTo(60, 20);
+        ctx.stroke(); 
 
-    // bar
-    ctx.beginPath();
-    ctx.stokeStyle = podium;
-    ctx.moveTo(140, 20);
-    ctx.lineTo(60, 20);
-    ctx.stroke(); 
+        // rope
+        ctx.beginPath();
+        ctx.strokeStyle = rope;
+        ctx.moveTo(140, 20);
+        ctx.lineTo(140, 40);
+        ctx.stroke();
+    }
 
-    // rope
-    ctx.beginPath();
-    ctx.strokeStyle = rope;
-    ctx.moveTo(140, 20);
-    ctx.lineTo(140, 40);
-    ctx.stroke();
-
+   
     if(wrongGuess >= 1){
         ctx.beginPath();
         ctx.strokeStyle = body;
@@ -148,10 +151,11 @@ resetGame.addEventListener('click', () => {
             char.style.visibility = 'hidden';
         }
     }
-    wrongGuess = 0;   
+    resetGame.style.visibility = 'hidden';
+    wrongGuess = 0;
+    ctx.clearRect(0, 0,  canvas.width, canvas.height);
+    draw(); 
 });
-
-
 
 // this will append each letter from the quote to the dom
 function createNode(element){
