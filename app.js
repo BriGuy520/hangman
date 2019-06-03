@@ -40,6 +40,38 @@ function createBoard(quote){
     });
 }
 
+// this will append each letter from the quote to the dom
+function createNode(element){
+    let newNode = document.createElement('span');
+    let htmlElement = document.body.appendChild(newNode);
+    htmlElement.setAttribute('class', 'letter');
+    htmlElement.innerHTML = `<p class="${element} inner">${element}</p>`;
+
+    if(element === " "){
+        htmlElement.style.borderBottom = 'none';
+    }
+
+    if(element.search(regex) === -1){
+        htmlElement.style.borderBottom = 'none';
+        htmlElement.style.visibility = 'visible';
+    }
+}
+
+function showAuthor(name){
+    let authorNode = document.createElement('p');
+    let appendAuthor = document.body.appendChild(authorNode);
+    appendAuthor.setAttribute('class', 'author')
+    appendAuthor.innerHTML = "- " + name;
+}
+
+function createHangman(x1, y1, x2, y2, color){
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
 // setting up the hangman canvas
 function draw(){
     const podium = 'rgb(204, 102, 0)';
@@ -48,32 +80,16 @@ function draw(){
     
     if(wrongGuess >= 0){
         //base
-        ctx.beginPath();
-        ctx.strokeStyle = podium;
-        ctx.moveTo(100, 120)
-        ctx.lineTo(10, 120);
-        ctx.stroke();
+        createHangman(100, 120, 10, 120, podium);
 
         // pole
-        ctx.beginPath();
-        ctx.stokeStyle = podium;
-        ctx.moveTo(60, 20);
-        ctx.lineTo(60, 120);
-        ctx.stroke();
+        createHangman(60, 20, 60, 120, podium);
 
         // bar
-        ctx.beginPath();
-        ctx.stokeStyle = podium;
-        ctx.moveTo(140, 20);
-        ctx.lineTo(60, 20);
-        ctx.stroke(); 
+        createHangman(140, 20, 60, 20, podium);
 
         // rope
-        ctx.beginPath();
-        ctx.strokeStyle = rope;
-        ctx.moveTo(140, 20);
-        ctx.lineTo(140, 40);
-        ctx.stroke();
+        createHangman(140, 20, 140, 40, rope);
     }
 
    
@@ -85,43 +101,23 @@ function draw(){
     }
     
     if(wrongGuess >= 2){
-        ctx.beginPath();
-        ctx.strokeStyle = body;
-        ctx.moveTo(140, 60);
-        ctx.lineTo(140, 100);
-        ctx.stroke();
+        createHangman(140, 60, 140, 100, body);
     } 
     
     if(wrongGuess >= 3){
-        ctx.beginPath();
-        ctx.strokeStyle = body;
-        ctx.moveTo(140, 70);
-        ctx.lineTo(120, 80);
-        ctx.stroke();
+        createHangman(140, 70, 120, 80, body);
     } 
     
     if(wrongGuess >= 4){
-        ctx.beginPath();
-        ctx.strokeStyle = body;
-        ctx.moveTo(140, 70);
-        ctx.lineTo(160, 80);
-        ctx.stroke();
+        createHangman(140, 70, 160, 80, body);
     }
     
     if(wrongGuess >= 5){
-        ctx.beginPath();
-        ctx.strokeStyle = body;
-        ctx.moveTo(140, 100);
-        ctx.lineTo(120, 110);
-        ctx.stroke();
+        createHangman(140, 100, 120, 110, body);
     } 
     
     if(wrongGuess === 6){
-        ctx.beginPath();
-        ctx.strokeStyle = body;
-        ctx.moveTo(140, 100);
-        ctx.lineTo(160, 110);
-        ctx.stroke();
+        createHangman(140, 100, 160, 110, body);
         resetGame.style.visibility = 'visible';
     }
 }
@@ -156,30 +152,6 @@ resetGame.addEventListener('click', () => {
     ctx.clearRect(0, 0,  canvas.width, canvas.height);
     draw(); 
 });
-
-// this will append each letter from the quote to the dom
-function createNode(element){
-    let newNode = document.createElement('span');
-    let htmlElement = document.body.appendChild(newNode);
-    htmlElement.setAttribute('class', 'letter');
-    htmlElement.innerHTML = `<p class="${element} inner">${element}</p>`;
-
-    if(element === " "){
-        htmlElement.style.borderBottom = 'none';
-    }
-
-    if(element.search(regex) === -1){
-        htmlElement.style.borderBottom = 'none';
-        htmlElement.style.visibility = 'visible';
-    }
-}
-
-function showAuthor(name){
-    let authorNode = document.createElement('p');
-    let appendAuthor = document.body.appendChild(authorNode);
-    appendAuthor.setAttribute('class', 'author')
-    appendAuthor.innerHTML = "- " + name;
-}
 
 
 
