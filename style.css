@@ -20,7 +20,7 @@ h1 {
   flex-direction: row;
   padding: 20px;
   background: lightgreen;
-  width: 30vw;
+  width: 50%;
   margin: 20px;
 }
 
@@ -50,7 +50,7 @@ h1 {
   float: right;
   height: 400px;
   width: 300px;
-  background: black;
+  background: lightblue;
   margin: 20px;
 }
 
@@ -79,5 +79,17 @@ p {
   visibility: visible;
   text-decoration: none;
   padding: 35px 10px;
+}
+
+@media only screen and (max-width: 1030px){
+  .submit-box {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 730px){
+  .submit-box {
+    width: 90%;
+  }
 }
 
