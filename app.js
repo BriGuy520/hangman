@@ -13,7 +13,7 @@ const regex = /[A-Za-z]/gi;
 
 let wrongGuess = 0;
 
-const url = `http://quotes.rest/qod.json?category=management`;
+const url = `https://quotes.rest/qod.json?category=management`;
 
 // this will be our promise to get our quote from the API
 function apiCall(url){
